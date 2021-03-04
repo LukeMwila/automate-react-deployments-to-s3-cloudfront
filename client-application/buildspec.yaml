@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - echo "Change directory..."
+      - cd client-application
+      - echo "Installing dependancies..."
+      - npm install --verbose 
+  build:
+    commands:
+      - echo "Executing ${ENV} environment"
+      - echo "Run application tests"
+      - CI=true npm test
+      - echo Build started on `date`
+      - npm run build
+  post_build:
+    commands:
+      - echo "Copy the contents of build to destination S3 bucket"
+      - aws s3 cp --recursive --acl public-read ./build s3://$S3_BUCKET_DESTINATION/
+artifacts:
+  files:
+    - '**/*'
