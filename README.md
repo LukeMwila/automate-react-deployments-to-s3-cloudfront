@@ -1,3 +1,9 @@
+# Automate React Deployments to S3 & CloudFront
+This repository contains the source code to create a CI/CD pipeline for a React application in AWS. The pipeline pulls the source code from GitHub and run tests against the application before deploying it to an S3 bucket for static site hosting. The site will then be distributed using CloudFront which will point to the S3 bucket. All of the infrastructure is built using Terraform. In addition, I make use of Terragrunt to create this setup for multiple environments in a DRY approach.
+
+## Technical Architecture Diagram
+![Alt text](./architecture-diagram.png?raw=true "Technical Architecture Diagram")
+
 ## The Concept of Backend State & State Locking
 ### Backend State
 Backend state enables you to persist the state of your deployed infrastructure. The 
